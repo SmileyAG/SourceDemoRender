@@ -1003,7 +1003,7 @@ void check_hw_caps()
     svr_log("Using graphics device %x by vendor %x\n", dxgi_adapter_desc.DeviceId, dxgi_adapter_desc.VendorId);
 
     D3D11_FEATURE_DATA_FORMAT_SUPPORT2 fmt_support2;
-    fmt_support2.InFormat = DXGI_FORMAT_R32G32B32A32_FLOAT;
+    fmt_support2.InFormat = DXGI_FORMAT_R32_FLOAT;
     d3d11_device->CheckFeatureSupport(D3D11_FEATURE_FORMAT_SUPPORT2, &fmt_support2, sizeof(D3D11_FEATURE_DATA_FORMAT_SUPPORT2));
 
     bool has_typed_uav_load = fmt_support2.OutFormatSupport2 & D3D11_FORMAT_SUPPORT2_UAV_TYPED_LOAD;

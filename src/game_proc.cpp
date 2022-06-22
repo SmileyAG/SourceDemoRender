@@ -376,7 +376,7 @@ UINT calc_bytes_pitch(DXGI_FORMAT format)
         case DXGI_FORMAT_R8_UINT: return 1;
         case DXGI_FORMAT_R8G8_UINT: return 2;
         case DXGI_FORMAT_R8G8B8A8_UINT: return 4;
-        case DXGI_FORMAT_R32G32B32A32_FLOAT: return 16;
+        case DXGI_FORMAT_R32_FLOAT: return 16;
     }
 
     assert(false);
@@ -1965,7 +1965,7 @@ bool proc_start(ID3D11Device* d3d11_device, ID3D11DeviceContext* d3d11_context, 
         work_tex_desc.Height = tex_desc.Height;
         work_tex_desc.MipLevels = 1;
         work_tex_desc.ArraySize = 1;
-        work_tex_desc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+        work_tex_desc.Format = DXGI_FORMAT_R32_FLOAT;
         work_tex_desc.SampleDesc.Count = 1;
         work_tex_desc.Usage = D3D11_USAGE_DEFAULT;
         work_tex_desc.BindFlags = D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_UNORDERED_ACCESS | D3D11_BIND_RENDER_TARGET;
