@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 0 1 * *' # Monthly
+
+jobs:
+  build:
+    runs-on: windows-2019
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    - uses: microsoft/setup-msbuild@v1.0.3
+    - name: Build (Minhook)
+      run: msbuild /m /nologo /t:Build /p:Configuration=Release deps/minhook/build/VC16/MinHookVC16.sln
+    - name: Build (SVR)
+      run: msbuild /m /nologo /t:Build /p:Configuration=Release svr.sln
+    - name: Prepare artifacts
+      run: |
+        mv CHANGELOG.TXT .\bin
+        mv README.MD .\bin
+        mkdir "./bin/data/shaders"
+        rm bin/* -Include *.lib, *.exp
+    - uses: ilammy/msvc-dev-cmd@v1.10.0
+    - name: Build (Shaders)
+      shell: cmd
+      run: call build_shaders.cmd
+    - uses: actions/upload-artifact@v3
+      with:
+        name: svr
+        path: bin
